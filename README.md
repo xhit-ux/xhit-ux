@@ -10,5 +10,7 @@
 [![wakatime](https://wakatime.com/badge/user/018affad-e5c0-4abc-8b03-8bef1d71dd75.svg)](https://wakatime.com/@018affad-e5c0-4abc-8b03-8bef1d71dd75)
 [![Static Badge](https://img.shields.io/badge/Blog-xhit--ux-tan)](https://xhit-ux.com)
 
-</div>
+<!--START_SECTION:waka-->
+<!--END_SECTION:waka-->
 
+</div>

@@ -1,0 +1,23 @@
+name: WakaTime Readme Update
+
+on:
+    schedule:
+        - cron: "0 0 * * *" # 每天更新一次数据
+    workflow_dispatch:
+
+jobs:
+    update-readme:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: WakaTime Stats
+              uses: anmol098/waka-readme-stats@master
+              with:
+                  WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+            - name: Commit Changes
+              run: |
+                  git config --global user.name 'github-actions[bot]'
+                  git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+                  git add README.md
+                  git commit -m "Updated WakaTime stats"
+                  git push
