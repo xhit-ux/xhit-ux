@@ -1,27 +1,17 @@
 name: Update gist with WakaTime stats
 on:
     schedule:
-        - cron: "0 0 * * *" # 每小时运行一次
+        - cron: "0 0 * * *"
+    # Manual triggers with workflow_dispatch
     workflow_dispatch:
 jobs:
-    update-readme:
+    update-gist:
         runs-on: ubuntu-latest
-
         steps:
-            - uses: actions/checkout@v2
-
-            - name: Fetch WakaTime Stats and Update Gist
-              uses: athul/waka-box@v4
-              with:
+            - uses: actions/checkout@master
+            - name: Update gist
+              uses: matchai/waka-box@master
+              env:
+                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+                  GIST_ID: ${{ secrets.GIST_ID }}
                   WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
-                  GH_TOKEN: ${{ secrets.GIST_TOKEN }} # GitHub Gist Token
-                  GIST_ID: ${{ secrets.GIST_ID }} # 替换为你的 Gist ID
-                  API_BASE_URL: https://wakatime.com # WakaTime API 基础 URL
-
-            - name: Commit Gist Changes
-              run: |
-                  git config --global user.name 'github-actions[bot]'
-                  git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-                  git add README.md
-                  git commit -m "Updated WakaTime stats"
-                  git push
